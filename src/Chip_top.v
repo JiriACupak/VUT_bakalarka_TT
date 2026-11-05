@@ -68,6 +68,7 @@ wire Change_block_reg_rst_signal;
 wire Change_block_reg_en_signal;
 wire [20:0] Change_block_reg_in_signal;
 wire [20:0] Change_block_reg_out_signal;
+  wire [20:0] Change_block_sel_signal;
 
   IN_block IN_component(
     .IN_block_in(IN_block_in_signal),
