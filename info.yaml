@@ -36,6 +36,7 @@ project:
    - "Plus_block.v"
    - "Change_block.v"
    - "IN_block.v"
+   - "Invert_12_block.v"
    - "Chip_top.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
