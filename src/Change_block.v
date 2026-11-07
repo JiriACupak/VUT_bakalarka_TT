@@ -25,7 +25,8 @@
 module Change_block(
 output wire [11:0] change_block_out,
 input wire [11:0] change_block_in,
-input wire [20:0] change_block_sel
+input wire [20:0] change_block_sel,
+input wire change_block_clk
 );
 
 
@@ -80,6 +81,13 @@ wire [11:0] Multiplexor_12_3_block_in_2_signal_4;
 wire [11:0] Multiplexor_12_3_block_in_3_signal_4;
 wire [11:0] Multiplexor_12_3_block_out_signal_4;
 wire [1:0] Multiplexor_12_3_block_sel_signal_4;
+wire [11:0] Flip_flop_12_input_inv_signal;
+wire [11:0] Flip_flop_12_output_inv_signal;
+wire [11:0] Flip_flop_12_input_plus_signal;
+wire [11:0] Flip_flop_12_output_plus_signal;
+wire [11:0] Flip_flop_12_input_sht_signal;
+wire [11:0] Flip_flop_12_output_sht_signal;
+wire Flip_flop_12_clk_signal;
 
   Invert_12_block Invert_12_block_component(
     .invert_12_block_in(invert_12_block_in_signal),
@@ -124,21 +132,39 @@ wire [1:0] Multiplexor_12_3_block_sel_signal_4;
     .Multiplexor_12_3_block_out(Multiplexor_12_3_block_out_signal_4),
     .Multiplexor_12_3_block_sel(Multiplexor_12_3_block_sel_signal_4));
 
+  Flip_flop_12_block Flip_flop_12_block_component_plus(
+    .Flip_flop_12_input(Flip_flop_12_input_plus_signal),
+    .Flip_flop_12_output(Flip_flop_12_output_plus_signal),
+    .Flip_flop_12_clk(Flip_flop_12_clk_signal));
+
+  Flip_flop_12_block Flip_flop_12_block_component_sht(
+    .Flip_flop_12_input(Flip_flop_12_input_sht_signal),
+    .Flip_flop_12_output(Flip_flop_12_output_sht_signal),
+    .Flip_flop_12_clk(Flip_flop_12_clk_signal));
+
+  Flip_flop_12_block Flip_flop_12_block_component_inv(
+    .Flip_flop_12_input(Flip_flop_12_input_inv_signal),
+    .Flip_flop_12_output(Flip_flop_12_output_inv_signal),
+    .Flip_flop_12_clk(Flip_flop_12_clk_signal));
+
   assign Multiplexor_12_3_block_in_3_signal_1 = Demultiplexor_12_3_block_out_1_signal_1;
   assign Multiplexor_12_3_block_in_2_signal_2 = Demultiplexor_12_3_block_out_2_signal_1;
   assign Multiplexor_12_3_block_in_2_signal_3 = Demultiplexor_12_3_block_out_3_signal_1;
   assign Multiplexor_12_3_block_in_1_signal_1 = Demultiplexor_12_3_block_out_1_signal_4;
   assign Multiplexor_12_3_block_in_2_signal_1 = Demultiplexor_12_3_block_out_1_signal_3;
-  assign invert_12_block_in_signal = Multiplexor_12_3_block_out_signal_1;
+  assign Flip_flop_12_input_inv_signal = Multiplexor_12_3_block_out_signal_1;
   assign Multiplexor_12_3_block_sel_signal_1 = change_block_sel[1:0];
+  assign invert_12_block_in_signal = Flip_flop_12_output_inv_signal;
   assign Multiplexor_12_3_block_in_1_signal_2 = Demultiplexor_12_3_block_out_3_signal_2;
   assign Multiplexor_12_3_block_in_3_signal_2 = Demultiplexor_12_3_block_out_2_signal_4;
-  assign plus_12_block_in_signal = Multiplexor_12_3_block_out_signal_2;
+  assign Flip_flop_12_input_plus_signal = Multiplexor_12_3_block_out_signal_2;
   assign Multiplexor_12_3_block_sel_signal_2 = change_block_sel[3:2];
+  assign plus_12_block_in_signal = Flip_flop_12_output_plus_signal;
   assign Multiplexor_12_3_block_in_1_signal_3 = Demultiplexor_12_3_block_out_2_signal_2;
   assign Multiplexor_12_3_block_in_3_signal_3 = Demultiplexor_12_3_block_out_3_signal_3;
-  assign Shift_12_block_in_signal = Multiplexor_12_3_block_out_signal_3;
+  assign Flip_flop_12_input_sht_signal = Multiplexor_12_3_block_out_signal_3;
   assign Multiplexor_12_3_block_sel_signal_3 = change_block_sel[5:4];
+  assign Shift_12_block_in_signal = Flip_flop_12_output_sht_signal;
   assign Multiplexor_12_3_block_in_1_signal_4 = Demultiplexor_12_3_block_out_1_signal_2;
   assign Multiplexor_12_3_block_in_2_signal_4 = Demultiplexor_12_3_block_out_2_signal_3;
   assign Multiplexor_12_3_block_in_3_signal_4 = Demultiplexor_12_3_block_out_3_signal_4;
@@ -159,5 +185,6 @@ wire [1:0] Multiplexor_12_3_block_sel_signal_4;
   assign Demultiplexor_12_3_block_out_1_signal_4 = Shift_12_block_out_signal;
   assign Demultiplexor_12_3_block_out_2_signal_4 = Shift_12_block_out_signal;
   assign Demultiplexor_12_3_block_out_3_signal_4 = Shift_12_block_out_signal;
+  assign Flip_flop_12_clk_signal = change_block_clk;
 
 endmodule
