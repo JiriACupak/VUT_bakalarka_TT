@@ -117,7 +117,7 @@ wire change_block_clk_signal;
   assign OUT_block_sel_signal = OUT_block_reg_out_signal;
   assign Change_block_reg_clk_signal = clk;
   assign Change_block_reg_rst_signal = rst_n;
-  assign Change_block_sel_signal = Change_block_reg_out_signal;
+  assign change_block_sel_signal = Change_block_reg_out_signal;
   assign change_block_clk_signal = clk;
   assign change_block_in_signal = IN_block_out_signal;
   assign OUT_block_in_signal = change_block_out_signal;
