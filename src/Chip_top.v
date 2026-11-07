@@ -122,4 +122,8 @@ wire change_block_clk_signal;
   assign change_block_in_signal = IN_block_out_signal;
   assign OUT_block_in_signal = change_block_out_signal;
 
+
+  assign uio_out = 8'b00000000;
+assign uio_oe  = 8'b00000000;
+
 endmodule
