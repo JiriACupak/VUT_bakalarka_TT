@@ -125,5 +125,11 @@ wire change_block_clk_signal;
 
   assign uio_out = 8'b00000000;
 assign uio_oe  = 8'b00000000;
+  assign OUT_block_reg_en_signal    = 1'b0;
+assign OUT_block_reg_in_signal    = 3'b000;
+assign IN_block_reg_en_signal     = 1'b0;
+assign IN_block_reg_in_signal     = 3'b000;
+assign Change_block_reg_en_signal = 1'b0;
+assign Change_block_reg_in_signal = 21'b0;
 
 endmodule
