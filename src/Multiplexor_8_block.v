@@ -39,9 +39,9 @@ input wire Multiplexor_8_block_sel
 
   always @(*) begin
     case(Multiplexor_8_block_sel)
-      1'b0 : Multiplexor_8_block_out = Multiplexor_8_block_in_1;
-      1'b1 : Multiplexor_8_block_out = Multiplexor_8_block_in_2;
-      default : Multiplexor_8_block_out = {8{1'bx}};
+      1'b0 : Multiplexor_8_block_out <= Multiplexor_8_block_in_1;
+      1'b1 : Multiplexor_8_block_out <= Multiplexor_8_block_in_2;
+      default : Multiplexor_8_block_out <= {8{1'bx}};
     endcase
   end
 
