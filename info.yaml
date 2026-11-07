@@ -17,6 +17,7 @@ project:
   # Source files must be in ./src and you must list each source file separately, one per line.
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
+   - "Flip_flop_12_block.v"
    - "Code_switch_block.v"
    - "Delay_block.v"
    - "Demultiplexor_8_block.v"
@@ -38,7 +39,7 @@ project:
    - "IN_block.v"
    - "Invert_12_block.v"
    - "Chip_top.v"
-   - "Flip_flop_12_block.v"
+   
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
