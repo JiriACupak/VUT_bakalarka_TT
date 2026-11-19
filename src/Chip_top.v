@@ -22,7 +22,7 @@
 
 // no timescale needed
 
-module tt_um_example(
+module tt_um_Chip_top(
 input wire [7:0] ui_in,
 output wire [7:0] uo_out,
 input wire [7:0] uio_in,
@@ -69,6 +69,9 @@ wire Change_block_reg_en_signal;
 wire [20:0] Change_block_reg_in_signal;
 wire [20:0] Change_block_reg_out_signal;
 wire change_block_clk_signal;
+wire Delay_block_step_signal;
+wire Delay_block_num_en_signal;
+wire [7:0] Delay_block_num_signal;
 
   IN_block IN_component(
     .IN_block_in(IN_block_in_signal),
@@ -107,6 +110,19 @@ wire change_block_clk_signal;
     .d_in(Change_block_reg_in_signal),
     .d_out(Change_block_reg_out_signal));
 
+  Delay_block Delay_component(
+    .Delay_block_step(Delay_block_step_signal),
+    .Delay_block_reset(rst_n),
+    .Delay_block_IN(IN_block_out_signal),
+    .Delay_block_num(Delay_block_num_signal),
+    .Delay_block_num_en(Delay_block_num_en_signal),
+    .Delay_block_OUT(change_block_in_signal));
+
+  Window_block Window_component(
+    .Window_block_input_data(change_block_out_signal),
+    .Window_block_output_data(OUT_block_in_signal),
+    .Window_block_reset(rst_n));
+
   assign IN_block_in_signal = ui_in;
   assign uo_out = OUT_block_out_signal;
   assign IN_block_reg_clk_signal = clk;
@@ -117,19 +133,7 @@ wire change_block_clk_signal;
   assign OUT_block_sel_signal = OUT_block_reg_out_signal;
   assign Change_block_reg_clk_signal = clk;
   assign Change_block_reg_rst_signal = rst_n;
-  assign change_block_sel_signal = Change_block_reg_out_signal;
+  assign Change_block_sel_signal = Change_block_reg_out_signal;
   assign change_block_clk_signal = clk;
-  assign change_block_in_signal = IN_block_out_signal;
-  assign OUT_block_in_signal = change_block_out_signal;
-
-
-  assign uio_out = 8'b00000000;
-assign uio_oe  = 8'b00000000;
-  assign OUT_block_reg_en_signal    = 1'b0;
-assign OUT_block_reg_in_signal    = 3'b000;
-assign IN_block_reg_en_signal     = 1'b0;
-assign IN_block_reg_in_signal     = 3'b000;
-assign Change_block_reg_en_signal = 1'b0;
-assign Change_block_reg_in_signal = 21'b0;
 
 endmodule

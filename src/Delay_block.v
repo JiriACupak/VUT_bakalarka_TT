@@ -23,13 +23,45 @@
 // no timescale needed
 
 module Delay_block(
-input wire clk
+input wire Delay_block_step,
+input wire Delay_block_reset,
+input wire [11:0] Delay_block_IN,
+input wire [7:0] Delay_block_num,
+input wire Delay_block_num_en,
+output wire [11:0] Delay_block_OUT
 );
 
-// Hodinový signál
 
 
 
+wire [7:0] reg_num_signal;
+wire [7:0] reg_step_signal;
+wire reset_cmp_signal;
+wire reset_flop_signal;
+
+  Delay_register_12_block Delay_register_12_component(
+    .Delay_register_12_block_flop(reset_flop_signal),
+    .Delay_register_12_block_reset(Delay_block_reset),
+    .Delay_register_12_block_IN(Delay_block_IN),
+    .Delay_register_12_block_OUT(Delay_block_OUT));
+
+  Delay_register_num Delay_register_num_component(
+    .Delay_register_num_en(Delay_block_num_en),
+    .Delay_register_num_reset(Delay_block_reset),
+    .Delay_register_num_NUM(Delay_block_num),
+    .Delay_register_num_OUT(reg_num_signal));
+
+  Delay_register_step_block Delay_register_step_component(
+    .Delay_register_step_block_step(Delay_block_step),
+    .Delay_register_step_block_reset(Delay_block_reset),
+    .Delay_register_step_block_reset_cmp(reset_cmp_signal),
+    .Delay_register_step_block_OUT(reg_step_signal));
+
+  Comparator_block Comparator_component(
+    .Comparator_block_flop(reset_flop_signal),
+    .Comparator_block_reset(reset_cmp_signal),
+    .Comparator_block_reg_num(reg_num_signal),
+    .Comparator_block_reg_step(reg_step_signal));
 
 
 endmodule
