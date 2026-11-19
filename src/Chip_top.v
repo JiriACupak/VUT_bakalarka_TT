@@ -133,7 +133,7 @@ wire [7:0] Delay_block_num_signal;
   assign OUT_block_sel_signal = OUT_block_reg_out_signal;
   assign Change_block_reg_clk_signal = clk;
   assign Change_block_reg_rst_signal = rst_n;
-  assign Change_block_sel_signal = Change_block_reg_out_signal;
+  assign Change_block_sel_signal = change_block_reg_out_signal;
   assign change_block_clk_signal = clk;
 
 endmodule
